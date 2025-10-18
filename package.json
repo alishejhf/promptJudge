@@ -4,6 +4,10 @@
   "description": "AI-powered prompt quality evaluator using Ollama",
   "type": "module",
   "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alishejhf/promptJudge.git"

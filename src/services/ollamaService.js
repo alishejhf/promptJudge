@@ -35,7 +35,7 @@ async function callOllama(prompt, model = OLLAMA_MODEL, temperature = OLLAMA_TEM
     }),
   });
 
-  if(!response.ok) {
+  if (!response.ok) {
     throw new Error(`Ollama API error: ${response.status} ${response.statusText}`);
   }
 
@@ -43,9 +43,9 @@ async function callOllama(prompt, model = OLLAMA_MODEL, temperature = OLLAMA_TEM
   return data.response;
 }
 
-
-export async function evaluatePrompt(propmtText, retryCount = 0) {
+export async function evaluatePrompt(promptText, retryCount = 0) {
   const fullPrompt = `${SYSTEM_PROMPT}\n\nEvaluate this prompt:\n"${promptText}"`;
+  
   const currentModel = retryCount > 0 ? OLLAMA_FALLBACK_MODEL : OLLAMA_MODEL;
   
   try {
@@ -61,7 +61,7 @@ export async function evaluatePrompt(propmtText, retryCount = 0) {
     return parsed;
   } catch (error) {
     console.error(`[OllamaService] Attempt ${retryCount + 1} failed:`, error.message);
-    
+
     if (retryCount === 0) {
       console.log('[OllamaService] Retrying with stricter instruction...');
       const stricterPrompt = `${SYSTEM_PROMPT}\n\nIMPORTANT: Respond with ONLY a JSON object, no explanations or markdown.\n\nEvaluate this prompt:\n"${promptText}"`;
@@ -101,7 +101,8 @@ Return ONLY the JSON object, no other text.`;
     
     const response = await callOllama(comparePrompt);
     const parsed = parseJSON(response);
-
+    
+    // Validate comparison result
     if (!parsed.winner || !parsed.reason || !parsed.scores) {
       throw new Error('Invalid comparison result format');
     }
@@ -110,6 +111,7 @@ Return ONLY the JSON object, no other text.`;
   } catch (error) {
     console.error('[OllamaService] Comparison failed:', error.message);
     
+    // Retry once
     try {
       console.log('[OllamaService] Retrying comparison with fallback model...');
       const response = await callOllama(comparePrompt, OLLAMA_FALLBACK_MODEL);

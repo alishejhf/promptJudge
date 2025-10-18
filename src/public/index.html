@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromptJudge - AI Prompt Quality Evaluator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚖️ PromptJudge</h1>
+            <p class="subtitle">AI-Powered Prompt Quality Evaluator</p>
+        </header>
+
+        <main>
+            <div class="mode-toggle">
+                <button id="evaluateBtn" class="mode-btn active">Evaluate Prompt</button>
+                <button id="compareBtn" class="mode-btn">Compare Prompts</button>
+                <button id="historyBtn" class="mode-btn">History</button>
+            </div>
+
+            <section id="evaluateMode" class="mode-section active">
+                <div class="input-group">
+                    <label for="promptInput">Enter your prompt:</label>
+                    <textarea 
+                        id="promptInput" 
+                        placeholder="Example: Tell me about climate change."
+                        rows="6"
+                    ></textarea>
+                </div>
+                <button id="submitEvaluate" class="submit-btn">
+                    <span class="btn-text">Evaluate Prompt</span>
+                    <span class="btn-loader"></span>
+                </button>
+            </section>
+
+            <section id="compareMode" class="mode-section">
+                <div class="input-group">
+                    <label for="promptA">Prompt A:</label>
+                    <textarea 
+                        id="promptA" 
+                        placeholder="Enter first prompt..."
+                        rows="4"
+                    ></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="promptB">Prompt B:</label>
+                    <textarea 
+                        id="promptB" 
+                        placeholder="Enter second prompt..."
+                        rows="4"
+                    ></textarea>
+                </div>
+                <button id="submitCompare" class="submit-btn">
+                    <span class="btn-text">Compare Prompts</span>
+                    <span class="btn-loader"></span>
+                </button>
+            </section>
+
+            <section id="historyMode" class="mode-section">
+                <div class="history-controls">
+                    <button id="refreshHistory" class="secondary-btn">Refresh History</button>
+                </div>
+                <div id="historyContainer" class="history-container">
+                    <p class="empty-message">No evaluation history yet.</p>
+                </div>
+            </section>
+
+            <div id="resultsContainer" class="results-container">
+                <div class="results-header">
+                    <h2>Results</h2>
+                    <button id="clearResults" class="clear-btn">Clear</button>
+                </div>
+                <div id="resultsContent" class="results-content">
+                    <p class="empty-message">Results will appear here...</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Ollama • Built with Express & Vanilla JS</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "promptjudge",
+  "version": "1.0.0",
+  "description": "AI-powered prompt quality evaluator using Ollama",
+  "type": "module",
+  "main": "src/app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alishejhf/promptJudge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alishejhf/promptJudge/issues"
+  },
+  "homepage": "https://github.com/alishejhf/promptJudge#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5",
+    "morgan": "^1.10.0"
+  }
+}
